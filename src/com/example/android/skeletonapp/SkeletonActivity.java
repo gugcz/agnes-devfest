@@ -20,8 +20,12 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.IntentFilter;
 import android.graphics.PixelFormat;
+import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnPreparedListener;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Display;
+import android.view.View.MeasureSpec;
 import android.widget.TextView;
 import android.widget.VideoView;
 
@@ -51,13 +55,6 @@ public class SkeletonActivity extends Activity {
 
         // TODO: only do if there is no alarm set
         AlarmReceiver.setAlarmForNextMessage(getBaseContext());
-        
-        //getWindow().setFormat(PixelFormat.TRANSLUCENT);
-//        VideoView vv = (VideoView) findViewById(R.id.videoView1);
-//        Uri video = Uri.parse("android.resource://" + getPackageName() + "/" 
-//        		+ R.raw.blueabstract);
-//        vv.setVideoURI(video);
-//        vv.start();
     }
 
     /**
@@ -68,6 +65,26 @@ public class SkeletonActivity extends Activity {
         super.onResume();
         
         showCurrentMessage();
+        
+        //getWindow().setFormat(PixelFormat.TRANSLUCENT);
+        VideoView vv = (VideoView) findViewById(R.id.videoView1);
+        Uri video = Uri.parse("android.resource://" + getPackageName() + "/" 
+        		+ R.raw.blueabstract_high);
+        vv.setVideoURI(video);
+        vv.setOnPreparedListener(new OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mp.setLooping(true);
+            }
+        });
+        vv.start();
+        
+        Display display = getWindowManager().getDefaultDisplay(); 
+        int childWidthMeasureSpec = MeasureSpec.makeMeasureSpec(display.getWidth(),
+                MeasureSpec.UNSPECIFIED);
+        int childHeightMeasureSpec = MeasureSpec.makeMeasureSpec(display.getHeight(),
+                MeasureSpec.UNSPECIFIED);
+        vv.measure(childWidthMeasureSpec, childHeightMeasureSpec);
         
         updateReceiver = new UpdateReceiver(this);
         registerReceiver(updateReceiver, new IntentFilter("NewMothershipMessage"));
@@ -91,6 +108,7 @@ public class SkeletonActivity extends Activity {
 //    }
     
     public void showCurrentMessage() {
+    	// TODO: use persistence to offer random messages
     	Message currentMessage = Schedule.getCurrentMessage();
     	if (currentMessage != null) {
     		TextView t = (TextView) findViewById(R.id.textView);
