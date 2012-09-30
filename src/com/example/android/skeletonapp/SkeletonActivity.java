@@ -154,25 +154,66 @@ public class SkeletonActivity extends Activity {
     
     public void showCurrentMessage() {
     	int currentUid = getSharedPreferences(PREFS_NAME, 0).getInt("currentUid", 0);
-    	Message currentMessage = Schedule.getCurrentMessage(currentUid);
+    	final Message currentMessage = Schedule.getCurrentMessage(currentUid);
     	
     	if (currentMessage != null) {
-    		boolean newMessage = currentMessage.uid != currentUid;
+    		boolean isNewMessage = currentMessage.uid != currentUid;
     		Log.v(TAG, "Saving new currentUid = " + currentMessage.uid);
     		getSharedPreferences(PREFS_NAME, 0).edit().putInt("currentUid", currentMessage.uid).commit();
     		
-    		TextView t = (TextView) findViewById(R.id.textView);
-    		t.setText(Html.fromHtml(currentMessage.text));
+    		final TextView t = (TextView) findViewById(R.id.textView);
+    		final TextView signature = (TextView) findViewById(R.id.signature);
+    		
     		t.setMovementMethod(LinkMovementMethod.getInstance());
     		
-    		Animation fadeinAni = AnimationUtils.loadAnimation(this, R.anim.fade_in);
-    		t.startAnimation(fadeinAni);
+//    		Animation fadeinAni = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+//    		t.startAnimation(fadeinAni);
     		
-    		TextView signature = (TextView) findViewById(R.id.signature);
-    		signature.setText(currentMessage.getTimeString()); // TODO
+    		final Animation fadeinAniDelayed = AnimationUtils.loadAnimation(this, R.anim.fade_in_delayed);
     		
-    		Animation fadeinAniDelayed = AnimationUtils.loadAnimation(this, R.anim.fade_in_delayed);
-    		signature.startAnimation(fadeinAniDelayed);
+    		if (isNewMessage) {
+    			t.setText("");
+    			signature.setText("");
+    			
+    			t.postDelayed(new Runnable() {
+        			int index = 0;
+        			String str = currentMessage.text;
+    				@Override
+    				public void run() {
+    					// skip insides of HTML tags
+    					if (index < str.length() && str.charAt(index) == '<') {
+    						int closingIndex = str.indexOf('>', index);
+    						if (closingIndex > index)
+    							index = closingIndex;
+    					}
+    					t.setText(Html.fromHtml((String) str.subSequence(0, index++)));
+    					if (index <= str.length()) {
+    						t.postDelayed(this, 10);
+    					} else {
+    						signature.setText(currentMessage.getTimeString());
+    			    		signature.startAnimation(fadeinAniDelayed);
+//    						signature.postDelayed(new Runnable() {
+//    							int sIndex = 0;
+//    							String sStr = currentMessage.getTimeString();
+//    							@Override
+//    							public void run() {
+//    								signature.setText(sStr.subSequence(0, sIndex++));
+//    								if (sIndex <= sStr.length()) {
+//    									signature.postDelayed(this, 10);
+//    								}
+//    							}
+//    							
+//    						}, 10);
+    					}
+    				}
+        		}, 10);
+    		} else {
+    			t.setText(Html.fromHtml(currentMessage.text));
+    			signature.setText(currentMessage.getTimeString());
+    		}
+    		
+//    		Animation fadeinAniDelayed = AnimationUtils.loadAnimation(this, R.anim.fade_in_delayed);
+//    		signature.startAnimation(fadeinAniDelayed);
     	}
     }
 

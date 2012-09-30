@@ -17,9 +17,10 @@ public class Schedule {
 	 */
 	public static final Message[] messages = {
 		new Message(date(2012, 9, 30, 8, 0), "Zatím se nic neděje ani nepřipravuje. Nepanikař!"),
-		new Message(date(2012, 9, 30, 21, 0), "Připravuj se a čekej na další pokyny. ", false, false),
-		new Message(date(2012, 9, 30, 21, 0), "Začíná se blížit den akce. Připrav sebe i své bližní. <a href=\"http://devfest.cz/\">df</a>"),
-		new Message(date(2012, 10, 30, 8, 0), "Time to rock in the future!", false, false)
+		new Message(date(2012, 10, 1, 1, 11), "Připravuj se a čekej na další pokyny. ", false, false),
+		new Message(date(2012, 10, 1, 1, 12), "Začíná se blížit den akce. Připrav sebe i své bližní. <a href=\"http://devfest.cz/\">df</a>"),
+		new Message(date(2012, 10, 1, 1, 12), "Toto je můj <a href='mailto:filiph@google.com'>email</a>. Honem mi teda napište!"),
+		new Message(date(2012, 10, 2, 8, 0), "Time to rock in the future!", false, false)
 	};
 	
 	/**
