@@ -23,8 +23,10 @@ import android.graphics.PixelFormat;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnErrorListener;
 import android.media.MediaPlayer.OnPreparedListener;
+import android.media.MediaPlayer.OnSeekCompleteListener;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
@@ -88,9 +90,21 @@ public class SkeletonActivity extends Activity {
 	        vv.setOnPreparedListener(new OnPreparedListener() {
 	            @Override
 	            public void onPrepared(MediaPlayer mp) {
+	            	mp.setOnSeekCompleteListener(new OnSeekCompleteListener() {
+						@Override
+						public void onSeekComplete(MediaPlayer mp) {
+							mp.start();
+							new Handler().postDelayed(new Runnable() {
+								@Override
+								public void run() {
+									ScrollView sv = (ScrollView) findViewById(R.id.scrollView);
+					            	sv.setBackgroundResource(0);
+								}
+							}, 100);
+						}
+	            	});
 	            	mp.setLooping(true);
-	            	ScrollView sv = (ScrollView) findViewById(R.id.scrollView);
-	            	sv.setBackgroundResource(0);
+	            	mp.seekTo(0);
 	            }
 	        });
 	        
@@ -99,7 +113,6 @@ public class SkeletonActivity extends Activity {
 	        	public boolean onError(MediaPlayer mp, int what, int extra) {
 	        		Log.e(TAG, "Error with video.");
 					return false;
-	        		
 	        	}
 	        });
 	        
@@ -111,10 +124,7 @@ public class SkeletonActivity extends Activity {
 	        vv.measure(childWidthMeasureSpec, childHeightMeasureSpec);
         }
        
-        
-
-        
-        vv.start();
+        vv.seekTo(0);
     }
     
     @Override
