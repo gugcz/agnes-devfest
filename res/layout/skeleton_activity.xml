@@ -43,6 +43,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true" />
+
     </RelativeLayout>
 
     <ScrollView
@@ -51,9 +52,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        android:orientation="vertical" >
-
-        <!-- android:background="@drawable/scratchesbpm" -->
+        android:orientation="vertical"
+        android:background="@drawable/blueabstract_high_jpeg"  >
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -81,7 +81,6 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="0dp"
-                android:linksClickable="true"
                 android:shadowColor="@color/black"
                 android:shadowDx="0"
                 android:shadowDy="0"
@@ -100,11 +99,11 @@
                 android:layout_marginBottom="30dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="30dp"
-                android:background="@color/white"
+                android:layout_marginTop="10dp"
                 android:padding="2dp"
                 android:text="@string/signature"
-                android:textColor="@color/black" >
+                android:textColor="@color/white" >
+
             </TextView>
         </LinearLayout>
     </ScrollView>
