@@ -49,7 +49,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 				.setContentText(context.getText(R.string.notificationMessageText))
 				.setTicker(context.getText(R.string.notificationMessage))
 				.setContentIntent(pendingShowIntent)
-				.setSmallIcon(R.drawable.devfestsmallicon)
+				.setSmallIcon(R.drawable.devfest_small_icon)
 				.setAutoCancel(true)
 				.setDefaults(bundle.getBoolean("vibrate") ? Notification.DEFAULT_VIBRATE | Notification.DEFAULT_SOUND 
 									: Notification.DEFAULT_SOUND)
