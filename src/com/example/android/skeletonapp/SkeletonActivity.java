@@ -169,7 +169,7 @@ public class SkeletonActivity extends Activity {
     		t.startAnimation(fadeinAni);
     		
     		TextView signature = (TextView) findViewById(R.id.signature);
-    		signature.setText(currentMessage.time.toString()); // TODO
+    		signature.setText(currentMessage.getTimeString()); // TODO
     		
     		Animation fadeinAniDelayed = AnimationUtils.loadAnimation(this, R.anim.fade_in_delayed);
     		signature.startAnimation(fadeinAniDelayed);

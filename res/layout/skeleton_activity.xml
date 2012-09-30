@@ -67,7 +67,7 @@
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="100dp"
                 android:background="@color/red"
                 android:padding="2dp"
                 android:text="@string/mothershipSays"
