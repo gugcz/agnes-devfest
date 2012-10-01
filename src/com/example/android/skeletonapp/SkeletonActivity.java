@@ -84,8 +84,9 @@ public class SkeletonActivity extends Activity {
         if (vv == null) {
 	        //getWindow().setFormat(PixelFormat.TRANSLUCENT);
 	        vv = (VideoView) findViewById(R.id.videoView1);
+	        // video from http://www.istockphoto.com/stock-video-17986614-data-servers-loopable-animation.php
 	        Uri video = Uri.parse("android.resource://" + getPackageName() + "/" 
-	        		+ R.raw.blueabstract_high_h264);
+	        		+ R.raw.servers);
 	        vv.setVideoURI(video);
 	        vv.setOnPreparedListener(new OnPreparedListener() {
 	            @Override
@@ -139,17 +140,6 @@ public class SkeletonActivity extends Activity {
     	unregisterReceiver(updateReceiver); // don't update the activity when paused
     }
     
-    /**
-     * This is called for activities that set launchMode to "singleTop" in their package.
-     * This is called by AlarmReceiver.
-     */
-//    @Override
-//    protected void onNewIntent(Intent intent) {
-//        super.onNewIntent(intent);
-//        
-//        showCurrentMessage();
-//    }
-    
     public static final String PREFS_NAME = "MothershipPrefs";
     
     public void showCurrentMessage() {
@@ -165,9 +155,6 @@ public class SkeletonActivity extends Activity {
     		final TextView signature = (TextView) findViewById(R.id.signature);
     		
     		t.setMovementMethod(LinkMovementMethod.getInstance());
-    		
-//    		Animation fadeinAni = AnimationUtils.loadAnimation(this, R.anim.fade_in);
-//    		t.startAnimation(fadeinAni);
     		
     		final Animation fadeinAniDelayed = AnimationUtils.loadAnimation(this, R.anim.fade_in_delayed);
     		
@@ -192,18 +179,6 @@ public class SkeletonActivity extends Activity {
     					} else {
     						signature.setText(currentMessage.getTimeString());
     			    		signature.startAnimation(fadeinAniDelayed);
-//    						signature.postDelayed(new Runnable() {
-//    							int sIndex = 0;
-//    							String sStr = currentMessage.getTimeString();
-//    							@Override
-//    							public void run() {
-//    								signature.setText(sStr.subSequence(0, sIndex++));
-//    								if (sIndex <= sStr.length()) {
-//    									signature.postDelayed(this, 10);
-//    								}
-//    							}
-//    							
-//    						}, 10);
     					}
     				}
         		}, 10);
@@ -211,9 +186,6 @@ public class SkeletonActivity extends Activity {
     			t.setText(Html.fromHtml(currentMessage.text));
     			signature.setText(currentMessage.getTimeString());
     		}
-    		
-//    		Animation fadeinAniDelayed = AnimationUtils.loadAnimation(this, R.anim.fade_in_delayed);
-//    		signature.startAnimation(fadeinAniDelayed);
     	}
     }
 
