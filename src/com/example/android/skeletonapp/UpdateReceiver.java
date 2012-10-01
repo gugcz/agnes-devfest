@@ -18,7 +18,7 @@ public class UpdateReceiver extends BroadcastReceiver {
         //Log.i("dbg","onRecieve() called!");
         if (activity != null) {
         	// TODO
-        	activity.showCurrentMessage();
+        	activity.showCurrentMessage(SkeletonActivity.TYPING_DEFAULT);
         }
     }
 }

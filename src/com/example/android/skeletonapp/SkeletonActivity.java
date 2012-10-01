@@ -16,9 +16,12 @@
 
 package com.example.android.skeletonapp;
 
+import java.util.Random;
+
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.graphics.PixelFormat;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnErrorListener;
@@ -31,12 +34,14 @@ import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.Display;
+import android.view.Menu;
 import android.view.View.MeasureSpec;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 /**
@@ -51,6 +56,7 @@ public class SkeletonActivity extends Activity {
 	private static final String TAG = "motherShip";
 	
 	private UpdateReceiver updateReceiver;
+	final private Handler typeHandler = new Handler(); 
 	
     public SkeletonActivity() {
     }
@@ -76,7 +82,7 @@ public class SkeletonActivity extends Activity {
     protected void onResume() {
         super.onResume();
         
-        showCurrentMessage();
+        showCurrentMessage(TYPING_DEFAULT);
         
         updateReceiver = new UpdateReceiver(this);
         registerReceiver(updateReceiver, new IntentFilter("NewMothershipMessage"));
@@ -87,54 +93,67 @@ public class SkeletonActivity extends Activity {
 	        // video from http://www.istockphoto.com/stock-video-17986614-data-servers-loopable-animation.php
 	        Uri video = Uri.parse("android.resource://" + getPackageName() + "/" 
 	        		+ R.raw.servers);
-	        vv.setVideoURI(video);
-	        vv.setKeepScreenOn(false);
 	        
-	        vv.setOnPreparedListener(new OnPreparedListener() {
-	            @Override
-	            public void onPrepared(MediaPlayer mp) {
-	            	mp.setOnSeekCompleteListener(new OnSeekCompleteListener() {
-						@Override
-						public void onSeekComplete(MediaPlayer mp) {
-							mp.start();
-							new Handler().postDelayed(new Runnable() {
-								@Override
-								public void run() {
-									ScrollView sv = (ScrollView) findViewById(R.id.scrollView);
-					            	sv.setBackgroundResource(0);
-								}
-							}, 100);
-						}
-	            	});
-	            	mp.setLooping(true);
-	            	mp.seekTo(0);
-	            }
-	        });
 	        
-	        vv.setOnErrorListener(new OnErrorListener() {
-	        	@Override
-	        	public boolean onError(MediaPlayer mp, int what, int extra) {
-	        		Log.e(TAG, "Error with video.");
-					return false;
-	        	}
-	        });
-	        
-	        Display display = getWindowManager().getDefaultDisplay(); 
-	        int childWidthMeasureSpec = MeasureSpec.makeMeasureSpec(display.getWidth(),
-	                MeasureSpec.UNSPECIFIED);
-	        int childHeightMeasureSpec = MeasureSpec.makeMeasureSpec(display.getHeight(),
-	                MeasureSpec.UNSPECIFIED);
-	        vv.measure(childWidthMeasureSpec, childHeightMeasureSpec);
+	        try {
+				vv.setVideoURI(video);
+				vv.setKeepScreenOn(false);
+				
+				vv.setOnPreparedListener(new OnPreparedListener() {
+				    @Override
+				    public void onPrepared(MediaPlayer mp) {
+				    	mp.setOnSeekCompleteListener(new OnSeekCompleteListener() {
+							@Override
+							public void onSeekComplete(MediaPlayer mp) {
+								mp.start();
+								new Handler().postDelayed(new Runnable() {
+									@Override
+									public void run() {
+										ScrollView sv = (ScrollView) findViewById(R.id.scrollView);
+						            	sv.setBackgroundResource(0);
+									}
+								}, 100);
+							}
+				    	});
+				    	mp.setLooping(true);
+				    	mp.seekTo(0);
+				    }
+				});
+				
+				vv.setOnErrorListener(new OnErrorListener() {
+					@Override
+					public boolean onError(MediaPlayer mp, int what, int extra) {
+						Log.e(TAG, "Error with video.");
+						return false;
+					}
+				});
+				
+				Display display = getWindowManager().getDefaultDisplay(); 
+				int childWidthMeasureSpec = MeasureSpec.makeMeasureSpec(display.getWidth(),
+				        MeasureSpec.UNSPECIFIED);
+				int childHeightMeasureSpec = MeasureSpec.makeMeasureSpec(display.getHeight(),
+				        MeasureSpec.UNSPECIFIED);
+				vv.measure(childWidthMeasureSpec, childHeightMeasureSpec);
+			} catch (Exception e) {
+				Log.e(TAG, "Error with background video, falling back to static background.");
+				e.printStackTrace();
+				
+				vv = null;
+				ScrollView sv = (ScrollView) findViewById(R.id.scrollView);
+            	sv.setBackgroundResource(R.drawable.servers);
+			}
         }
        
-        vv.seekTo(0);
+        if (vv != null && vv.canSeekBackward() && vv.canSeekForward()) {
+        	vv.seekTo(0);
+        }
     }
     
     @Override
     protected void onPause() {
     	super.onPause();
     	
-    	if (vv != null) {
+    	if (vv != null && vv.canPause()) {
     		vv.pause();
     		//vv.suspend();
     	}
@@ -142,9 +161,60 @@ public class SkeletonActivity extends Activity {
     	unregisterReceiver(updateReceiver); // don't update the activity when paused
     }
     
+    private int funnyRemarkIndex = 0;
+    
+    /**
+     * Clicking the menu button prints funny messages.
+     */
+    public boolean onPrepareOptionsMenu(Menu menu) {
+    	final SkeletonActivity mainActivity = this;
+    	final TextView t = (TextView) findViewById(R.id.textView);
+		final TextView signature = (TextView) findViewById(R.id.signature);
+		
+    	t.setText("");
+		signature.setText("");
+		
+		String[] funnyRemarks = getResources().getStringArray(R.array.menu_mothership_funny_remarks);
+		final String str = funnyRemarks[funnyRemarkIndex];
+		if (funnyRemarkIndex < funnyRemarks.length - 1) {
+			funnyRemarkIndex++;
+		}
+		
+		typeHandler.removeCallbacksAndMessages(null);
+		
+		typeHandler.postDelayed(new Runnable() {
+			int index = 0;
+			
+			@Override
+			public void run() {
+				// skip insides of HTML tags
+				if (index < str.length() && str.charAt(index) == '<') {
+					int closingIndex = str.indexOf('>', index);
+					if (closingIndex > index)
+						index = closingIndex;
+				}
+				t.setText(Html.fromHtml((String) str.subSequence(0, index++)));
+				if (index <= str.length()) {
+					typeHandler.postDelayed(this, 10);
+				} else {
+					typeHandler.postDelayed(new Runnable() {
+						@Override
+						public void run() {
+							mainActivity.showCurrentMessage(TYPING_FORCE_SHOW);
+						}
+					}, 5000);
+				}
+			}
+		}, 10);
+    	return false;
+    }
+    
     public static final String PREFS_NAME = "MothershipPrefs";
     
-    public void showCurrentMessage() {
+    public static final int TYPING_DEFAULT = 0;
+    public static final int TYPING_FORCE_SHOW = 1;
+    
+    public void showCurrentMessage(int typingOption) {
     	int currentUid = getSharedPreferences(PREFS_NAME, 0).getInt("currentUid", 0);
     	final Message currentMessage = Schedule.getCurrentMessage(currentUid);
     	
@@ -160,11 +230,12 @@ public class SkeletonActivity extends Activity {
     		
     		final Animation fadeinAniDelayed = AnimationUtils.loadAnimation(this, R.anim.fade_in_delayed);
     		
-    		if (isNewMessage) {
+    		if (isNewMessage || typingOption == TYPING_FORCE_SHOW) {
     			t.setText("");
     			signature.setText("");
     			
-    			t.postDelayed(new Runnable() {
+    			typeHandler.removeCallbacksAndMessages(null);
+    			typeHandler.postDelayed(new Runnable() {
         			int index = 0;
         			String str = currentMessage.text;
     				@Override
@@ -177,7 +248,7 @@ public class SkeletonActivity extends Activity {
     					}
     					t.setText(Html.fromHtml((String) str.subSequence(0, index++)));
     					if (index <= str.length()) {
-    						t.postDelayed(this, 10);
+    						typeHandler.postDelayed(this, 10);
     					} else {
     						signature.setText(currentMessage.getTimeString());
     			    		signature.startAnimation(fadeinAniDelayed);
