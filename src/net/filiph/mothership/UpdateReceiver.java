@@ -4,6 +4,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
+/**
+ * This simple Broadcast Receiver listens to the relevant intent
+ * and calls MainActivity's [showCurrentMessage()] method on receive.
+ */
 public class UpdateReceiver extends BroadcastReceiver {
 
     private MainActivity activity;

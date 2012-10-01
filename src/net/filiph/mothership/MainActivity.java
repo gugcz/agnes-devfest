@@ -39,9 +39,7 @@ import android.widget.TextView;
 import android.widget.VideoView;
 
 /**
- * This class provides a basic demonstration of how to write an Android
- * activity. Inside of its window, it places a single view: an EditText that
- * displays and edits some internal text.
+ * This is the main activity, meaning the UI screen.
  */
 @TargetApi(8)
 public class MainActivity extends Activity {
@@ -88,11 +86,13 @@ public class MainActivity extends Activity {
 	        Uri video = Uri.parse("android.resource://" + getPackageName() + "/" 
 	        		+ R.raw.servers);
 	        
-	        
+	        // this horrible spaghetti is responsible for showing the background video
+	        // with as few flicker as possible
 	        try {
 				vv.setVideoURI(video);
 				vv.setKeepScreenOn(false);
 				
+				// we can only access the MediaPlaye instance after video is Prepared
 				vv.setOnPreparedListener(new OnPreparedListener() {
 				    @Override
 				    public void onPrepared(MediaPlayer mp) {
@@ -100,6 +100,9 @@ public class MainActivity extends Activity {
 							@Override
 							public void onSeekComplete(MediaPlayer mp) {
 								mp.start();
+								
+								// give the player 100 milliseconds to start playing
+								// then hide the placeholder static image
 								new Handler().postDelayed(new Runnable() {
 									@Override
 									public void run() {
@@ -122,6 +125,7 @@ public class MainActivity extends Activity {
 					}
 				});
 				
+				// stretch the video full view
 				Display display = getWindowManager().getDefaultDisplay(); 
 				int childWidthMeasureSpec = MeasureSpec.makeMeasureSpec(display.getWidth(),
 				        MeasureSpec.UNSPECIFIED);
@@ -132,6 +136,7 @@ public class MainActivity extends Activity {
 				Log.e(TAG, "Error with background video, falling back to static background.");
 				e.printStackTrace();
 				
+				// something went wrong, fall back to static image
 				vv = null;
 				ScrollView sv = (ScrollView) findViewById(R.id.scrollView);
             	sv.setBackgroundResource(R.drawable.servers);
@@ -208,6 +213,15 @@ public class MainActivity extends Activity {
     public static final int TYPING_DEFAULT = 0;
     public static final int TYPING_FORCE_SHOW = 1;
     
+    /**
+     * Checks which message should be shown. If that particular message has been
+     * already shown, just make sure it's showing again (with setText).
+     * If it's a new message, type it out ("typewriter effect").
+     * 
+     * @param typingOption	When set to TYPING_FORCE_SHOW, the message will be typed out
+     * 						no matter if it's been already shown or not. Default is 
+     * 						TYPING_DEFAULT.
+     */
     public void showCurrentMessage(int typingOption) {
     	int currentUid = getSharedPreferences(PREFS_NAME, 0).getInt("currentUid", 0);
     	final Message currentMessage = Schedule.getCurrentMessage(currentUid);
@@ -220,14 +234,15 @@ public class MainActivity extends Activity {
     		final TextView t = (TextView) findViewById(R.id.textView);
     		final TextView signature = (TextView) findViewById(R.id.signature);
     		
+    		// make sure system takes care of links in messages
     		t.setMovementMethod(LinkMovementMethod.getInstance());
-    		
-    		final Animation fadeinAniDelayed = AnimationUtils.loadAnimation(this, R.anim.fade_in_delayed);
     		
     		if (isNewMessage || typingOption == TYPING_FORCE_SHOW) {
     			t.setText("");
     			signature.setText("");
+    			final Animation fadeinAniDelayed = AnimationUtils.loadAnimation(this, R.anim.fade_in_delayed);
     			
+    			// typewriter effect
     			typeHandler.removeCallbacksAndMessages(null);
     			typeHandler.postDelayed(new Runnable() {
         			int index = 0;
@@ -244,17 +259,17 @@ public class MainActivity extends Activity {
     					if (index <= str.length()) {
     						typeHandler.postDelayed(this, 10);
     					} else {
+    						// the small print should just fade in
     						signature.setText(currentMessage.getTimeString());
     			    		signature.startAnimation(fadeinAniDelayed);
     					}
     				}
         		}, 10);
     		} else {
+    			// no typewriter effect
     			t.setText(Html.fromHtml(currentMessage.text));
     			signature.setText(currentMessage.getTimeString());
     		}
     	}
     }
-
-
 }

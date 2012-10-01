@@ -9,11 +9,17 @@ import java.util.TimeZone;
 
 import android.util.Log;
 
+/**
+ * This is where the mothership's message schedule goes.
+ */
 public class Schedule {
 	private static final String TAG = "schedule";
 
 	/**
-	 * Change these to change the schedule.
+	 * Change these to change the schedule. 
+	 * 
+	 * When there are 2 or more Messages with exact same [date()] arguments, 
+	 * one of them will be randomly chosen at runtime.
 	 */
 	public static final Message[] messages = {
 		new Message(date(2012, 10, 1, 0, 0), "Přípravy jsou v plném proudu! Už se na tebe těším.", false, false),
@@ -30,25 +36,40 @@ public class Schedule {
 	 * Change the time zone here.
 	 */
 	final static String TIMEZONE_ID = "Europe/Prague";
-
-	Schedule() {
-		
-	}
 	
 	/**
-	 * Change the schedule here.
+	 * This function just returns the messages array. It might do some logic in the future.
 	 */
 	public static Message[] getSchedule() {
-
 		return messages;
 	}
 	
+	/**
+	 * Convenience function. Creates a Date using input values and the [:TIMEZONE_ID:].
+	 * 
+	 * @param year
+	 * @param month
+	 * @param day
+	 * @param hour
+	 * @param minute
+	 * @return
+	 */
 	public static Date date(int year, int month, int day, int hour, int minute) {
 		Calendar working = GregorianCalendar.getInstance(TimeZone.getTimeZone(TIMEZONE_ID));
 		working.set(year, month - 1, day, hour, minute, 1);
 		return working.getTime();
 	}
 
+	/**
+	 * Gets the message that should be currently shown. When there are multiple Messages with the
+	 * same (or almost same) [time], this function will 1) choose one randomly or 2) choose the
+	 * one that is currently showing (same uid).
+	 *  
+	 * @param currentUid	The message that is shown right now. When choosing randomly, this
+	 * 						ensures that the messages won't be alternating each time user
+	 * 						pauses and resumes the app. 
+	 * @return		The message to be shown or [null] if there is no message to be shown right now.
+	 */
 	public static Message getCurrentMessage(int currentUid) {
 		Date now = GregorianCalendar.getInstance(TimeZone.getTimeZone(TIMEZONE_ID)).getTime();
 		ArrayList<Message> currentMessages = new ArrayList<Message>();
@@ -84,6 +105,10 @@ public class Schedule {
 		return currentMessages.get(new Random().nextInt(currentMessages.size())); // get random
 	}
 
+	/**
+	 * Gets the next message to be shown.
+	 * @return	The message to be shown next.
+	 */
 	public static Message getNextMessage() {
 		Date now = GregorianCalendar.getInstance(TimeZone.getTimeZone(TIMEZONE_ID)).getTime();
 		Message nextMessage = null;

@@ -33,7 +33,6 @@ public class AlarmReceiver extends BroadcastReceiver {
 			context.sendBroadcast(updateIntent);
 
 			try {
-	
 				// intent to show the main activity
 				if (bundle.getBoolean("forceShowActivity")) {
 					Intent showIntent = new Intent(context, MainActivity.class);
@@ -66,7 +65,6 @@ public class AlarmReceiver extends BroadcastReceiver {
 					NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 					nm.notify(0, noti);
 				}
-	
 			} catch (Exception e) {
 				Log.e(TAG, "There was an error while creating notification. Trying a Toast.");
 				e.printStackTrace();
@@ -85,11 +83,16 @@ public class AlarmReceiver extends BroadcastReceiver {
 			Log.e(TAG, "There was an error in sending intent to the main activity. The main activity doesn't know it's time for update.");
 			e.printStackTrace();
 		}
-		
 
 		setAlarmForNextMessage(context);
 	}
 
+	/**
+	 * Gets the upcoming message and sets the AlarmManager to call this class
+	 * when the message's time comes.
+	 * 
+	 * @param context
+	 */
 	public static void setAlarmForNextMessage(Context context) {
 		// set alarm for next message, if any
 		Message nextMessage = Schedule.getNextMessage();
