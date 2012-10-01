@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.skeletonapp;
+package net.filiph.mothership;
 
 import java.util.Random;
 
@@ -50,7 +50,7 @@ import android.widget.VideoView;
  * displays and edits some internal text.
  */
 @TargetApi(8)
-public class SkeletonActivity extends Activity {
+public class MainActivity extends Activity {
     
 	@SuppressWarnings("unused")
 	private static final String TAG = "motherShip";
@@ -58,7 +58,7 @@ public class SkeletonActivity extends Activity {
 	private UpdateReceiver updateReceiver;
 	final private Handler typeHandler = new Handler(); 
 	
-    public SkeletonActivity() {
+    public MainActivity() {
     }
 
     /** Called with the activity is first created. */
@@ -167,7 +167,7 @@ public class SkeletonActivity extends Activity {
      * Clicking the menu button prints funny messages.
      */
     public boolean onPrepareOptionsMenu(Menu menu) {
-    	final SkeletonActivity mainActivity = this;
+    	final MainActivity mainActivity = this;
     	final TextView t = (TextView) findViewById(R.id.textView);
 		final TextView signature = (TextView) findViewById(R.id.signature);
 		

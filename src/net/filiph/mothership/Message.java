@@ -1,4 +1,4 @@
-package com.example.android.skeletonapp;
+package net.filiph.mothership;
 
 import java.util.Date;
 

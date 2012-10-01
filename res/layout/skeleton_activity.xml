@@ -101,7 +101,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp"
                 android:padding="2dp"
-                android:text="@string/signature"
+                android:text=""
                 android:textColor="@color/white" >
 
             </TextView>

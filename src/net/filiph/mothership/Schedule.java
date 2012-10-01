@@ -1,4 +1,4 @@
-package com.example.android.skeletonapp;
+package net.filiph.mothership;
 
 import java.util.ArrayList;
 import java.util.Calendar;

@@ -1,4 +1,4 @@
-package com.example.android.skeletonapp;
+package net.filiph.mothership;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -7,9 +7,9 @@ import android.util.Log;
 
 public class UpdateReceiver extends BroadcastReceiver {
 
-    private SkeletonActivity activity;
+    private MainActivity activity;
 
-    UpdateReceiver(SkeletonActivity activity) {
+    UpdateReceiver(MainActivity activity) {
         this.activity = activity;
     }
 
@@ -18,7 +18,7 @@ public class UpdateReceiver extends BroadcastReceiver {
         //Log.i("dbg","onRecieve() called!");
         if (activity != null) {
         	// TODO
-        	activity.showCurrentMessage(SkeletonActivity.TYPING_DEFAULT);
+        	activity.showCurrentMessage(MainActivity.TYPING_DEFAULT);
         }
     }
 }

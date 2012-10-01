@@ -1,4 +1,4 @@
-package com.example.android.skeletonapp;
+package net.filiph.mothership;
 
 import android.app.AlarmManager;
 import android.app.Notification;
@@ -36,7 +36,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 	
 				// intent to show the main activity
 				if (bundle.getBoolean("forceShowActivity")) {
-					Intent showIntent = new Intent(context, SkeletonActivity.class);
+					Intent showIntent = new Intent(context, MainActivity.class);
 					showIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					context.startActivity(showIntent);
 				}
@@ -49,7 +49,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 				if (bundle.getBoolean("notify")) {
 					//Log.v(TAG, "showing notification");
 	
-					Intent showIntent = new Intent(context, SkeletonActivity.class); 
+					Intent showIntent = new Intent(context, MainActivity.class); 
 					showIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					PendingIntent pendingShowIntent = PendingIntent.getActivity(context, 0, showIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 	
