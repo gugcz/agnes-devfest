@@ -88,6 +88,8 @@ public class SkeletonActivity extends Activity {
 	        Uri video = Uri.parse("android.resource://" + getPackageName() + "/" 
 	        		+ R.raw.servers);
 	        vv.setVideoURI(video);
+	        vv.setKeepScreenOn(false);
+	        
 	        vv.setOnPreparedListener(new OnPreparedListener() {
 	            @Override
 	            public void onPrepared(MediaPlayer mp) {
