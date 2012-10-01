@@ -16,12 +16,13 @@ public class Schedule {
 	 * Change these to change the schedule.
 	 */
 	public static final Message[] messages = {
-		new Message(date(2012, 9, 30, 8, 0), "Zatím se nic neděje ani nepřipravuje. Nepanikař!"),
-		new Message(date(2012, 10, 1, 1, 16), "Připravuj se a čekej na další pokyny. Tvoje mateřská loď tě má ráda!", false, false),
-		new Message(date(2012, 10, 1, 18, 30), "Začíná se blížit den akce a lidé z <a href='http://www.gug.cz/'>gug.cz</a> zasedají k poradě."),
-		new Message(date(2012, 10, 1, 18, 45), "Je čas na menší networking. Honem se začni bavit s člověkem po tvé pravici."),
-		new Message(date(2012, 10, 1, 18, 45), "Je čas na menší networking. Honem se začni bavit s člověkem po tvé levici."),
-		new Message(date(2012, 10, 1, 18, 45), "Mám tě ráda. Jsi pro mě důležitý(á).", false, false),
+		new Message(date(2012, 10, 1, 0, 0), "Přípravy jsou v plném proudu! Už se na tebe těším.", false, false),
+		new Message(date(2012, 10, 2, 15, 0), "Možná tě bude zajímat web <a href='http://www.devfest.cz/'>devfest.cz</a>."),
+		new Message(date(2012, 10, 2, 18, 45), "Je čas na odpočinek. Do 10. listopadu je třeba nabrat sílu!"),
+		new Message(date(2012, 10, 3, 0, 0), "Ty v takovou nekřesťanskou hodinu ještě nespíš?", false, false),
+		new Message(date(2012, 10, 3, 8, 0), "Mám tě ráda. Jsi pro mě důležitý(á).", false, false),
+		new Message(date(2012, 10, 3, 12, 30), "Nezapomeň napsat Filipovi zpětnou vazbu na adresu <a href='mailto:filiph@google.com'>filiph@google.com</a>."),
+		new Message(date(2012, 10, 4, 8, 0), "Dál už je to na nás, co vymyslíme.", false, false)
 //		new Message(date(2012, 10, 2, 8, 0), "Time to rock in the future!", false, false)
 	};
 	
