@@ -1,5 +1,6 @@
 package net.filiph.mothership;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.text.format.DateFormat;
@@ -35,6 +36,6 @@ public class Message {
 	}
 	
 	public String getTimeString() {
-		return (String) DateFormat.format("MM/dd/yy h:mmaa", time);
+		return (String) new SimpleDateFormat("yyyy/MM/dd//hh:mm").format(time);
 	}
 }
