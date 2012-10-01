@@ -16,13 +16,9 @@
 
 package net.filiph.mothership;
 
-import java.util.Random;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.IntentFilter;
-import android.content.res.Resources;
-import android.graphics.PixelFormat;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnErrorListener;
 import android.media.MediaPlayer.OnPreparedListener;
@@ -40,8 +36,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.TextView.BufferType;
-import android.widget.Toast;
 import android.widget.VideoView;
 
 /**

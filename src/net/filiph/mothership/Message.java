@@ -3,8 +3,6 @@ package net.filiph.mothership;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import android.text.format.DateFormat;
-
 public class Message {
 	public final Date time;
 	public final String text;
