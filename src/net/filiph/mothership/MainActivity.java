@@ -120,8 +120,15 @@ public class MainActivity extends Activity {
 				vv.setOnErrorListener(new OnErrorListener() {
 					@Override
 					public boolean onError(MediaPlayer mp, int what, int extra) {
-						Log.e(TAG, "Error with video.");
-						return false;
+						Log.e(TAG, "Error with video playback. Reverting to static image.");
+						
+						// something went wrong, fall back to static image
+						vv.suspend();
+						vv = null;
+						ScrollView sv = (ScrollView) findViewById(R.id.scrollView);
+		            	sv.setBackgroundResource(R.drawable.servers);
+		            	
+						return true; // don't report
 					}
 				});
 				
@@ -137,6 +144,7 @@ public class MainActivity extends Activity {
 				e.printStackTrace();
 				
 				// something went wrong, fall back to static image
+				vv.suspend();
 				vv = null;
 				ScrollView sv = (ScrollView) findViewById(R.id.scrollView);
             	sv.setBackgroundResource(R.drawable.servers);
