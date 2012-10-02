@@ -58,9 +58,9 @@ public class Message {
 	
 	/**
 	 * Constructs a string describing the time
-	 * @return	A string in "yyyy/MM/dd//hh:mm" format.
+	 * @return	A string in "yyyy/MM/dd//HH:mm" format.
 	 */
 	public String getTimeString() {
-		return (String) new SimpleDateFormat("yyyy/MM/dd//hh:mm").format(time);
+		return (String) new SimpleDateFormat("yyyy/MM/dd//HH:mm").format(time);
 	}
 }
