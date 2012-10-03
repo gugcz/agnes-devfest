@@ -1,0 +1,35 @@
+{
+  "app_name":       "DevFest Mothership",
+  "report_string":  "Mothership says:",
+
+  "event_name":   "DevFest Prague",
+  "timezone":     "Europe/Prague",
+  "event_start":  "2012-11-10 09:00",
+  "event_end":    "2012-11-10 23:59",
+
+  "menu_key_remarks": [
+    "Please: no clicking on that button.",
+    "Stop pushing that button, will you?",
+    "That's... really not necessary.",
+    "You won't get anywhere by doing that"
+  ],
+
+  "messages": [
+    {
+      "start": "2012-11-10 09:30",
+      "message": "Time to go to the keynote!",
+      "vibrate": true,
+      "notify": true
+    },
+    {
+      "start": "2012-11-10 9:45",
+      "message": "Pay attention!",
+      "notify": true,
+      "sound": true
+    }
+    {
+      "start": "2012-11-10 10:00",
+      "message": "How did you like the keynote? If you didn't, please let an organizer know.",
+    }
+  ]
+}
