@@ -41,6 +41,7 @@ public class Schedule {
 	 * This function just returns the messages array. It might do some logic in the future.
 	 */
 	public static Message[] getSchedule() {
+		// TODO: use JSON (gson) instead
 		return messages;
 	}
 	
