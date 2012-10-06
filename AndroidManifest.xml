@@ -1,27 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="net.filiph.mothership" android:installLocation="preferExternal" android:versionCode="2" android:versionName="v0.1.1">
-    
-	<uses-sdk android:minSdkVersion="8" android:targetSdkVersion="8" />
-	
+    package="net.filiph.mothership"
+    android:installLocation="preferExternal"
+    android:versionCode="3"
+    android:versionName="v0.2" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="8" />
+
     <uses-permission android:name="android.permission.VIBRATE" />
-    <!-- FLASHLIGHT, ACCESS_COARSE_LOCATION, INTERNET, READ_PROFILE -->
-    
-    <application android:label="@string/app_name" android:icon="@drawable/mothership_96x96">
 
-        <activity android:name="net.filiph.mothership.MainActivity"
+    <permission
+        android:name="net.filiph.mothership.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="net.filiph.mothership.permission.C2D_MESSAGE" />
+    <!-- App receives GCM messages. -->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <!-- GCM connects to Google Services. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- GCM requires a Google account. -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <!-- Keeps the processor from sleeping when a message is received. -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application
+        android:icon="@drawable/mothership_96x96"
+        android:label="@string/app_name" >
+        <activity
+            android:name="net.filiph.mothership.MainActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar" 
-            android:launchMode="singleTop">
-
+            android:theme="@android:style/Theme.NoTitleBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+        
+        <service android:name=".GCMIntentService" />
 
-        <receiver  android:process=":remote" android:name="AlarmReceiver" />
+        <receiver
+            android:name="AlarmReceiver"
+            android:process=":remote" />
+        <receiver
+            android:name="com.google.android.gcm.GCMBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                <category android:name="net.filiph.mothership" />
+            </intent-filter>
+        </receiver>
     </application>
+
 </manifest>
