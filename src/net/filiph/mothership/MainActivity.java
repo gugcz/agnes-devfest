@@ -54,7 +54,7 @@ import com.google.android.gcm.GCMRegistrar;
 @TargetApi(8)
 public class MainActivity extends Activity {
 
-	private static final String TAG = "motherShip";
+	private static final String TAG = "motherShip MainActivity";
 
 	private UpdateReceiver updateReceiver;
 	final private Handler typeHandler = new Handler();
@@ -69,7 +69,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		// Inflate our UI from its XML layout description.
-		setContentView(R.layout.skeleton_activity);
+		setContentView(R.layout.main_activity);
 
 		// TODO: only do if there is no alarm set
 		AlarmReceiver.setAlarmForNextMessage(getBaseContext());
