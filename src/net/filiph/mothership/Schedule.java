@@ -22,14 +22,12 @@ public class Schedule {
 	 * one of them will be randomly chosen at runtime.
 	 */
 	public static final Message[] messages = {
-		new Message(date(2012, 10, 1, 0, 0), "Přípravy jsou v plném proudu! Už se na tebe těším.", false, false),
-		new Message(date(2012, 10, 2, 15, 0), "Možná tě bude zajímat web <a href='http://www.devfest.cz/'>devfest.cz</a>."),
-		new Message(date(2012, 10, 2, 18, 45), "Je čas na odpočinek. Do 10. listopadu je třeba nabrat sílu!"),
-		new Message(date(2012, 10, 3, 0, 0), "Ty v takovou nekřesťanskou hodinu ještě nespíš?", false, false),
-		new Message(date(2012, 10, 3, 8, 0), "Mám tě ráda. Jsi pro mě důležitý(á).", false, false),
-		new Message(date(2012, 10, 3, 12, 30), "Nezapomeň napsat Filipovi zpětnou vazbu na adresu <a href='mailto:filiph@google.com'>filiph@google.com</a>."),
-		new Message(date(2012, 10, 7, 20, 5), "Dál už je to na nás, co vymyslíme.", false, false)
-//		new Message(date(2012, 10, 2, 8, 0), "Time to rock in the future!", false, false)
+		new Message(date(2012, 1, 1, 0, 0), "Hledám jméno. Mateřská loď je takové... neosobní.", false, false),
+		new Message(date(2012, 10, 7, 23, 0), "Těší mě, já jsem Agnes."),
+		new Message(date(2012, 10, 9, 11, 0), "<a href='http://mothership-backdoor.appspot.com/'>Backdoor</a> přímo do mého mozku naprogramoval David Vávra. Stále ještě se snažím mu odpustit."),
+		new Message(date(2012, 10, 10, 0, 0), "Ty v takovou nekřesťanskou hodinu ještě nespíš?", false, false),
+		new Message(date(2012, 10, 10, 8, 0), "Mám tě ráda. Jsi pro mě důležitý(á).", false, false),
+		new Message(date(2012, 10, 10, 20, 5), "Dál už je to na nás, co vymyslíme.", false, false)
 	};
 	
 	/**
