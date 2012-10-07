@@ -15,6 +15,7 @@
  */
 package net.filiph.mothership.gcm;
 
+import net.filiph.mothership.NotificationHelper;
 import android.content.Context;
 import android.content.Intent;
 
@@ -63,5 +64,7 @@ public final class CommonUtilities {
         Intent intent = new Intent(DISPLAY_MESSAGE_ACTION);
         intent.putExtra(EXTRA_MESSAGE, message);
         context.sendBroadcast(intent);
+        
+        NotificationHelper.notify(context, true); // notify on new message and vibrate (TODO: let GCM sender choose)
     }
 }

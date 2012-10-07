@@ -28,7 +28,7 @@ public class Schedule {
 		new Message(date(2012, 10, 3, 0, 0), "Ty v takovou nekřesťanskou hodinu ještě nespíš?", false, false),
 		new Message(date(2012, 10, 3, 8, 0), "Mám tě ráda. Jsi pro mě důležitý(á).", false, false),
 		new Message(date(2012, 10, 3, 12, 30), "Nezapomeň napsat Filipovi zpětnou vazbu na adresu <a href='mailto:filiph@google.com'>filiph@google.com</a>."),
-		new Message(date(2012, 10, 4, 8, 0), "Dál už je to na nás, co vymyslíme.", false, false)
+		new Message(date(2012, 10, 7, 20, 5), "Dál už je to na nás, co vymyslíme.", false, false)
 //		new Message(date(2012, 10, 2, 8, 0), "Time to rock in the future!", false, false)
 	};
 	
