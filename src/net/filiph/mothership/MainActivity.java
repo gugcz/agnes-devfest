@@ -257,7 +257,14 @@ public class MainActivity extends Activity {
 	 */
 	public void showCurrentMessage(int typingOption) {
 		int currentUid = getSharedPreferences(PREFS_NAME, 0).getInt("currentUid", 0);
-		final Message currentMessage = Schedule.getCurrentMessage(currentUid);
+		Message currentMessage = Schedule.getCurrentMessage(currentUid);
+		
+		// check if we ought to be showing a message sent via GCM
+		long lastGcmMessageTime = getSharedPreferences(PREFS_NAME, 0).getLong("gcmMessageTime", 0);
+		if (lastGcmMessageTime > currentMessage.time.getTime()) {
+			currentMessage = new Message(new Date(), getSharedPreferences(PREFS_NAME, 0).getString("gcmMessageString", ""));
+		}
+		
 		showMessage(typingOption, currentMessage);
 	}
 
@@ -382,8 +389,12 @@ public class MainActivity extends Activity {
 			String newMessage = intent.getExtras().getString(CommonUtilities.EXTRA_MESSAGE);
 			Message message = new Message(new Date(), newMessage);
 			showMessage(TYPING_DEFAULT, message);
-			// TODO: save message into database, not possible now because
-			// messages are in static non-expandable array
+
+			// put the newest message into a pref so we show it even after resuming the app
+			getSharedPreferences(PREFS_NAME, 0).edit()
+				.putString("gcmMessageString", newMessage)
+				.putLong("gcmMessageTime", new Date().getTime())
+				.commit();
 		}
 	};
 }
