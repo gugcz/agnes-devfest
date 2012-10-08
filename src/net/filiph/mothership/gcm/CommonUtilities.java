@@ -15,6 +15,9 @@
  */
 package net.filiph.mothership.gcm;
 
+import java.util.Date;
+
+import net.filiph.mothership.MainActivity;
 import net.filiph.mothership.NotificationHelper;
 import android.content.Context;
 import android.content.Intent;
@@ -60,10 +63,19 @@ public final class CommonUtilities {
      * @param context application's context.
      * @param message message to be displayed.
      */
-    public static void displayMessage(Context context, String message) {
-        Intent intent = new Intent(DISPLAY_MESSAGE_ACTION);
-        intent.putExtra(EXTRA_MESSAGE, message);
-        context.sendBroadcast(intent);
+    public static void displayMessage(Context context, String messageString) {
+		// put the newest message into a pref so we show it even after resuming the app
+		context.getSharedPreferences(MainActivity.PREFS_NAME, 0).edit()
+			.putString("gcmMessageString", messageString)
+			.putLong("gcmMessageTime", new Date().getTime())
+			.commit();
+    	
+//        Intent intent = new Intent(DISPLAY_MESSAGE_ACTION);
+//        intent.putExtra(EXTRA_MESSAGE, messageString);
+//        context.sendBroadcast(intent);
+		
+		Intent updateIntent = new Intent("NewMothershipMessage");
+		context.sendBroadcast(updateIntent);
         
         NotificationHelper.notify(context, true); // notify on new message and vibrate (TODO: let GCM sender choose)
     }

@@ -20,7 +20,7 @@ public class Message {
 	 * @param t		The time when this message should appear.
 	 * @param s		The actual text of the message. This can contain HTML tags.
 	 */
-	Message(Date t, String s) {
+	public Message(Date t, String s) {
 		time = t;
 		text = s;
 		uid = getHashFromString(s + getTimeString());
@@ -34,7 +34,7 @@ public class Message {
 	 * @param _notify	Whether to make a notification when the message's time comes.
 	 * @param _vibrate	Whether to vibrate when the message's time comes.
 	 */
-	Message(Date t, String s, boolean _notify, boolean _vibrate) {
+	public Message(Date t, String s, boolean _notify, boolean _vibrate) {
 		time = t;
 		text = s;
 		notify = _notify;

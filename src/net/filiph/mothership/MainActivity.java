@@ -310,6 +310,7 @@ public class MainActivity extends Activity {
 							if (closingIndex > index)
 								index = closingIndex;
 						}
+						// TODO: use text adding instead of setting, then at the end set text to use HTML tags? 
 						t.setText(Html.fromHtml((String) str.subSequence(0, index++)));
 						if (index <= str.length()) {
 							typeHandler.postDelayed(this, 10);
