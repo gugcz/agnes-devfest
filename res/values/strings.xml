@@ -19,13 +19,13 @@
 
 <resources>
     <!-- Simple strings. -->
-    <string name="app_name">DevFest Mothership</string>
+    <string name="app_name">Agnes</string>
 
-    <string name="mothershipSays">Mateřská loď říká:</string>
+    <string name="mothershipSays">Agnes říká:</string>
 
     <string name="pokyn0">Vyčkej na další pokyny. \n\nZatím vše najdeš na <a href="http://www.devfest.cz/">devfest.cz</a>.</string>
 
     <string name="notificationMessage">DevFest Praha</string>
-    <string name="notificationMessageText">Nová zpráva z mateřské lodi</string>
+    <string name="notificationMessageText">Nová zpráva od Agnes</string>
 </resources>
 

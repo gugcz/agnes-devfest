@@ -26,62 +26,31 @@ public class AlarmReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		//Log.v(TAG, "onReceive called");
+		Bundle bundle = intent.getExtras();
+		
 		try {
-			Bundle bundle = intent.getExtras();
-
 			Intent updateIntent = new Intent("NewMothershipMessage");
 			context.sendBroadcast(updateIntent);
-
-			try {
-				// intent to show the main activity
-				if (bundle.getBoolean("forceShowActivity")) {
-					Intent showIntent = new Intent(context, MainActivity.class);
-					showIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					context.startActivity(showIntent);
-				}
-			} catch (Exception e) {
-				Log.e(TAG, "There was an error while trying to force show the main activity. Failing.");
-				e.printStackTrace();
-			}
-			
-			try {
-				if (bundle.getBoolean("notify")) {
-					//Log.v(TAG, "showing notification");
-	
-					Intent showIntent = new Intent(context, MainActivity.class); 
-					showIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					PendingIntent pendingShowIntent = PendingIntent.getActivity(context, 0, showIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-	
-					Notification noti = new NotificationCompat.Builder(context)
-					.setContentTitle(context.getText(R.string.notificationMessage))
-					.setContentText(context.getText(R.string.notificationMessageText))
-					.setTicker(context.getText(R.string.notificationMessage))
-					.setContentIntent(pendingShowIntent)
-					.setSmallIcon(R.drawable.devfest_small_icon)
-					.setAutoCancel(true)
-					.setDefaults(bundle.getBoolean("vibrate") ? Notification.DEFAULT_VIBRATE | Notification.DEFAULT_SOUND 
-										: Notification.DEFAULT_SOUND)
-					.build();
-					NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-					nm.notify(0, noti);
-				}
-			} catch (Exception e) {
-				Log.e(TAG, "There was an error while creating notification. Trying a Toast.");
-				e.printStackTrace();
-				
-				if (bundle.getBoolean("notify")) {
-					try {
-						Toast.makeText(context, context.getText(R.string.notificationMessage), Toast.LENGTH_LONG).show();
-					} catch (Exception e2) {
-						Log.e(TAG, "There was an error while creating a Toast. Failed to update user on the .");
-						e2.printStackTrace();
-					}
-				}
-			}
-		
 		} catch (Exception e) {
 			Log.e(TAG, "There was an error in sending intent to the main activity. The main activity doesn't know it's time for update.");
 			e.printStackTrace();
+		}
+			
+		try {
+			// intent to show the main activity
+			if (bundle.getBoolean("forceShowActivity")) {
+				Intent showIntent = new Intent(context, MainActivity.class);
+				showIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				context.startActivity(showIntent);
+			}
+		} catch (Exception e) {
+			Log.e(TAG, "There was an error while trying to force show the main activity. Failing that silently.");
+			e.printStackTrace();
+		}
+		
+		NotificationHelper.clearNotification(context);
+		if (bundle.getBoolean("notify")) {
+			NotificationHelper.notify(context, bundle.getBoolean("vibrate"));
 		}
 
 		setAlarmForNextMessage(context);
