@@ -12,6 +12,7 @@
 # generated files
 bin/
 gen/
+DevFestMothership-server/war/WEB-INF/appengine-generated/
 
 # Local configuration file (sdk path, etc)
 local.properties
@@ -19,3 +20,4 @@ local.properties
 # Eclipse project files
 .classpath
 .project
+DevFestMothership-server/.settings/com.google.appengine.eclipse.core.prefs
