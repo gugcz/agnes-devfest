@@ -316,8 +316,8 @@ public class MainActivity extends Activity {
 							typeHandler.postDelayed(this, 10);
 						} else {
 							// the small print should just fade in
-							signature.setText(message.getTimeString());
 							signature.startAnimation(fadeinAniDelayed);
+							signature.setText(message.getTimeString());
 						}
 					}
 				}, 10);
