@@ -53,7 +53,20 @@ public class SendAllMessagesServlet extends BaseServlet {
 			List<String> partialDevices = new ArrayList<String>(total);
 			int counter = 0;
 			int tasks = 0;
-			String messageText = req.getParameter("message");
+			String messageText = "[";
+			if (req.getParameter("notify")!=null) {
+				messageText += "n";
+			}
+			if (req.getParameter("vibrate")!=null) {
+				messageText += "v";
+			}
+			if (req.getParameter("update")!=null) {
+				messageText += "u";
+			}
+			messageText += "]";
+			if (req.getParameter("message") != null) {
+				messageText += req.getParameter("message");
+			}			
 			for (String device : devices) {
 				counter++;
 				partialDevices.add(device);
