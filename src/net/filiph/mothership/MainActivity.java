@@ -262,7 +262,8 @@ public class MainActivity extends Activity {
 		// check if we ought to be showing a message sent via GCM
 		long lastGcmMessageTime = getSharedPreferences(PREFS_NAME, 0).getLong("gcmMessageTime", 0);
 		if (lastGcmMessageTime > currentMessage.time.getTime()) {
-			currentMessage = new Message(new Date(), getSharedPreferences(PREFS_NAME, 0).getString("gcmMessageString", ""));
+			currentMessage = new Message(new Date(lastGcmMessageTime), 
+					getSharedPreferences(PREFS_NAME, 0).getString("gcmMessageString", ""));
 		}
 		
 		showMessage(typingOption, currentMessage);
