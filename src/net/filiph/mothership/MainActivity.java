@@ -306,16 +306,22 @@ public class MainActivity extends Activity {
 					@Override
 					public void run() {
 						// skip insides of HTML tags
-						if (index < str.length() && str.charAt(index) == '<') {
-							int closingIndex = str.indexOf('>', index);
-							if (closingIndex > index)
-								index = closingIndex;
-						}
-						// TODO: use text adding instead of setting, then at the end set text to use HTML tags? 
-						t.setText(Html.fromHtml((String) str.subSequence(0, index++)));
-						if (index <= str.length()) {
-							typeHandler.postDelayed(this, 10);
+						if (index < str.length()) {
+							if (str.charAt(index) == '<') {
+								int closingIndex = str.indexOf('>', index);
+								if (closingIndex > index)
+									index = closingIndex + 1;
+							}
+							if (index < str.length()) {
+								t.append(str.substring(index,index+1));
+								index++;
+							}
+							if (index <= str.length()) {
+								typeHandler.postDelayed(this, 30);
+							}
 						} else {
+							// now add with all markup, too
+							t.setText(Html.fromHtml((String) str));
 							// the small print should just fade in
 							signature.startAnimation(fadeinAniDelayed);
 							signature.setText(message.getTimeString());
