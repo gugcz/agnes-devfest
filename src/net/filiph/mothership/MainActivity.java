@@ -89,7 +89,7 @@ public class MainActivity extends Activity {
 		showCurrentMessage(TYPING_DEFAULT);
 
 		updateReceiver = new UpdateReceiver(this);
-		registerReceiver(updateReceiver, new IntentFilter("NewMothershipMessage"));
+		registerReceiver(updateReceiver, new IntentFilter("net.filiph.mothership.NEW_MOTHERSHIP_MESSAGE"));
 
 		if (vv == null) {
 			// getWindow().setFormat(PixelFormat.TRANSLUCENT);

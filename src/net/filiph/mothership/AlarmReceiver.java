@@ -29,7 +29,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 		Bundle bundle = intent.getExtras();
 		
 		try {
-			Intent updateIntent = new Intent("NewMothershipMessage");
+			Intent updateIntent = new Intent("net.filiph.mothership.NEW_MOTHERSHIP_MESSAGE");
 			context.sendBroadcast(updateIntent);
 		} catch (Exception e) {
 			Log.e(TAG, "There was an error in sending intent to the main activity. The main activity doesn't know it's time for update.");

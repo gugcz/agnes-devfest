@@ -116,7 +116,7 @@ public final class CommonUtilities {
 	//        intent.putExtra(EXTRA_MESSAGE, messageString);
 	//        context.sendBroadcast(intent);
 			
-			Intent updateIntent = new Intent("NewMothershipMessage");
+			Intent updateIntent = new Intent("net.filiph.mothership.NEW_MOTHERSHIP_MESSAGE");
 			context.sendBroadcast(updateIntent);
     	}
 			
