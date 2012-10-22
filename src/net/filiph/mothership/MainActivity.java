@@ -307,7 +307,7 @@ public class MainActivity extends Activity {
 					public void run() {
 						// skip insides of HTML tags
 						if (index < str.length()) {
-							if (str.charAt(index) == '<') {
+							while (index < str.length() && str.charAt(index) == '<') {
 								int closingIndex = str.indexOf('>', index);
 								if (closingIndex > index)
 									index = closingIndex + 1;
