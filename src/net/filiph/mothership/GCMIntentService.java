@@ -15,8 +15,6 @@
  */
 package net.filiph.mothership;
 
-import java.io.UnsupportedEncodingException;
-
 import net.filiph.mothership.gcm.CommonUtilities;
 import net.filiph.mothership.gcm.ServerUtilities;
 import android.content.Context;

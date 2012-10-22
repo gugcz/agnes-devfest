@@ -28,7 +28,7 @@ public class Schedule {
 		new Message(date(2012, 10, 10, 0, 0), "Ty v takovou nekřesťanskou hodinu ještě nespíš?", false, false),
 		new Message(date(2012, 10, 10, 8, 0), "Mám tě ráda. Jsi pro mě důležitý(á).", false, false),
 		new Message(date(2012, 10, 10, 20, 5), "Dál už je to na nás, co vymyslíme.", false, false),
-		new Message(date(2012, 10, 16, 0, 0), "<a href='http://mothership-backdoor.appspot.com/'>Backdoor</a> teď funguje tak, že si můžete vybrat, jestli a jak chcete notifikovat.", false, false),
+		new Message(date(2012, 10, 22, 12, 19), "<a href='http://mothership-backdoor.appspot.com/'>Backdoor</a> teď funguje tak, že si můžete vybrat, jestli a jak chcete notifikovat.", false, false),
 	};
 	
 	/**
@@ -78,11 +78,11 @@ public class Schedule {
 		for (int i = 0; i < messages.length; i++) {
 			if (messages[i].time.before(now)) {
 				if (Math.abs(lastTimestamp - messages[i].time.getTime()) > 1000) {
-					Log.v(TAG, "Clearing messages.");
+					//Log.v(TAG, "Clearing messages.");
 					currentMessages.clear();
 					lastTimestamp = messages[i].time.getTime();
 				}
-				Log.v(TAG, "Adding message: " + messages[i].text + "\ntimestamp: " + messages[i].time.getTime());
+				//Log.v(TAG, "Adding message: " + messages[i].text + "\ntimestamp: " + messages[i].time.getTime());
 				currentMessages.add(messages[i]);
 			} else if (messages[i].time.after(now)) {
 				break;
@@ -93,11 +93,11 @@ public class Schedule {
 			return null;
 		}
 		
-		Log.v(TAG, "Looking for a message with same UID ("+currentUid+")");
+		//Log.v(TAG, "Looking for a message with same UID ("+currentUid+")");
 		for (int i = 0; i < currentMessages.size(); i++) {
-			Log.v(TAG, "Considering message: " + currentMessages.get(i).text);
+			//Log.v(TAG, "Considering message: " + currentMessages.get(i).text);
 			if (currentMessages.get(i).uid == currentUid) {
-				Log.v(TAG, "- message has same currentUid");
+				//Log.v(TAG, "- message has same currentUid");
 				return currentMessages.get(i);
 			}
 		}

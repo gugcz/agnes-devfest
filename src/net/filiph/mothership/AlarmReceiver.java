@@ -1,23 +1,18 @@
 package net.filiph.mothership;
 
 import android.app.AlarmManager;
-import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-import android.widget.Toast;
 
 /* from http://justcallmebrian.com/?p=129 */
 
 public class AlarmReceiver extends BroadcastReceiver {
 
-	@SuppressWarnings("unused")
 	private static final String TAG = "alarmReceiver";
 
 	public static final int REQUEST_CODE = 192837;
@@ -76,6 +71,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 			try {
 				// Get the AlarmManager service
 				AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+				am.cancel(sender);
 				am.set(AlarmManager.RTC_WAKEUP, nextMessage.time.getTime(), sender);
 				//Log.v(TAG, "Next message alarm set for " + nextMessage.time.toString() + " (now it's  "+ new Date().toString() +")");
 			} catch (Exception e) {
