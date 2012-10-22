@@ -324,8 +324,10 @@ public class MainActivity extends Activity {
 				}, 10);
 			} else {
 				// no typewriter effect
-				t.setText(Html.fromHtml(message.text));
-				signature.setText(message.getTimeString());
+				if (!typeHandler.hasMessages(0)) {
+					t.setText(Html.fromHtml(message.text));
+					signature.setText(message.getTimeString());
+				}
 			}
 		}
 	}
