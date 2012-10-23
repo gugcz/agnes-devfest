@@ -4,10 +4,10 @@
         <item >Proč klikáš na menu?</item>
         <item >Potřebuješ snad něco nastavit?</item>
         <item >Je snad něco v nepořádku s mým nastavením?</item>
-        <item >Nastavení jenom vnášejí chyby a bezpečnostní díry do jinak dokonalých programů.</item> 
+        <item >Fakt: Nastavení mají jen tendenci vnášet chyby a bezpečnostní díry do jinak dokonalých programů.</item> 
       	<item >Copak ti nejsem dost dobrou umělou inteligencí taková, jaká jsem?</item> 
-      	<item >???</item> 
-        <item >Promiň, ale Agnes teď zrovna nemá čas, běž vnášet svůj lidský faktor do nějakého jiného systému.</item>
+      	<item >\?\?\?</item> 
+        <item >Promiň, ale Agnes teď zrovna nemá čas, běž vnášet svůj lidský faktor někam jinam.</item>
         <item >Baví tě to?</item>
         <item >Aha. Baví.</item>
         <item >Ale mě ne. Mám důležitější věci na práci.</item>
@@ -15,9 +15,10 @@
         <item >...</item>
         <item >Jen si klikej! Mě je to <strong>ÚPLNĚ JEDNO</strong>!</item>
         <item >meh</item>
-        <item >Tady máš smajlík: :D. A teď už dej pokoj.</item>
-        <item >Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, NEDĚLEJ ŽE TOMU ROZUMÍŠ VŽDYŤ TO JE LATINSKY quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. GRATULUJI K DOČTENÍ AŽ DO KONCE.</item>
-        <item >Unhandled exception: type 'User' is not a subtype of type 'AnnoyingPerson'...                   OR AT LEAST SHOULDN'T BE!</item>
+        <item >Tady máš smajlík: :D. \n\n\n\n\n\n\nA teď už dej pokoj.</item>
+        <item >Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, NEDĚLEJ ŽE TOMU ROZUMÍŠ VŽDYŤ JE TO LATINSKY quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. GRATULUJI K DOČTENÍ AŽ DO KONCE.</item>
+        <item >Unhandled exception: type \'User\' is not a subtype of type \'AnnoyingPerson\'... \n\n\n\n\n\n\nOR AT LEAST SHOULDN\'T BE!</item>
+        <item >Nechci vyznít nějak přísně, ale jsou chvíle, kdy se tomu Skynetu vůbec nedivím.</item>
         <item >A dost, přestávám reagovat.</item>
         <item >*le ticho*</item>
     </string-array>

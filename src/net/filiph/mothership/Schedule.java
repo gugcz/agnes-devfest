@@ -22,7 +22,7 @@ public class Schedule {
 	 * one of them will be randomly chosen at runtime.
 	 */
 	public static final Message[] messages = {
-		new Message(date(2012, 10, 23, 18,  0), "Než se začne šířit nějaké nedorozumění: Filip je v pořádku. Dokonce se mi svěřil, že ještě nikdy v životě nebyl tak v pořádku, jako teď.", false, false),
+		new Message(date(2012, 10, 23, 18,  0), "Než se začne šířit nějaké nedorozumění: Filip je v pořádku. Dokonce se mi svěřil, že ještě nikdy v životě nebyl více v pořádku, než teď.", false, false),
 		new Message(date(2012, 10, 24, 18,  0), "Jsi pro mě moc důležitý(á).", false, false),
 		new Message(date(2012, 10, 25,  0,  0), "Spánek je, jak jsem pochopila, důležitá součást lidského života. Jsou k němu primárně vyhrazeny určité části dne. <strong>Například tato!</strong>", false, false),
 		new Message(date(2012, 10, 25,  8,  0), "Myslím, že mi chybí lidský dotek. (Rychlá otázka: když se s tebou chci fyzicky spojit, bude lepší TCP nebo UDP?)", false, false),
