@@ -38,6 +38,7 @@ import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.Display;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View.MeasureSpec;
 import android.view.animation.Animation;
@@ -190,6 +191,14 @@ public class MainActivity extends Activity {
 		unregisterReceiver(mHandleMessageReceiver);
 		GCMRegistrar.onDestroy(getApplicationContext());
 		super.onDestroy();
+	}
+	
+	@Override
+	public void onBackPressed()
+	{
+		// the new messages may create steps in activity stack
+		// this makes sure that pressing the back button exits the activity
+        finish(); 
 	}
 
 	private int funnyRemarkIndex = 0;
