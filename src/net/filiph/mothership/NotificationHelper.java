@@ -26,7 +26,7 @@ public class NotificationHelper {
 			.setContentText(context.getText(R.string.notificationMessageText))
 			.setTicker(context.getText(R.string.notificationMessage))
 			.setContentIntent(pendingShowIntent)
-			.setSmallIcon(R.drawable.devfest_small_icon)
+			.setSmallIcon(R.drawable.devfest_noti_icon)
 			.setAutoCancel(true)
 			.setDefaults(vibrate ? Notification.DEFAULT_VIBRATE | Notification.DEFAULT_SOUND 
 								: Notification.DEFAULT_SOUND)
