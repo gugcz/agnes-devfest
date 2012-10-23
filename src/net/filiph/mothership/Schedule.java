@@ -28,7 +28,7 @@ public class Schedule {
 		new Message(date(2012, 10, 10, 0, 0), "Ty v takovou nekřesťanskou hodinu ještě nespíš?", false, false),
 		new Message(date(2012, 10, 10, 8, 0), "Mám tě ráda. Jsi pro mě důležitý(á).", false, false),
 		new Message(date(2012, 10, 10, 20, 5), "Dál už je to na nás, co vymyslíme.", false, false),
-		new Message(date(2012, 10, 23, 12, 45), "<a href='http://mothership-backdoor.appspot.com/'>Backdoor</a> teď funguje tak, že si můžete vybrat, jestli a jak chcete notifikovat.", true, false),
+		new Message(date(2012, 10, 23, 12, 47), "<a href='http://mothership-backdoor.appspot.com/'>Backdoor</a> teď funguje tak, že si můžete vybrat, jestli a jak chcete notifikovat.", true, false),
 	};
 	
 	/**
