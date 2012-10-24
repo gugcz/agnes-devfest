@@ -47,7 +47,7 @@ public class HomeServlet extends BaseServlet {
 		out.print("  <link rel='icon' href='/favicon.ico'/>");
 		out.print("  <meta charset='utf-8' />");
 		out.print("</head>");
-		out.print("<body style=\"background-image:url('matrix.gif'); color:white;text-align:center\"><div style=\"display:inline-block;background-color: rgba(0%, 0%, 0%, 0.7)\">");
+		out.print("<body style=\"background-image:url('matrix.png'); color:white;text-align:center\"><div style=\"display:inline-block;background-color: rgba(0%, 0%, 0%, 0.7)\">");
 		String status = (String) req.getAttribute(ATTRIBUTE_STATUS);
 		if (status != null) {
 			out.print(status);
