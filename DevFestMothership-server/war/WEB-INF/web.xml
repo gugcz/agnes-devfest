@@ -100,7 +100,7 @@
  
  <security-constraint>
         <web-resource-collection>
-            <url-pattern>/home</url-pattern>
+            <url-pattern>/</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>admin</role-name>
