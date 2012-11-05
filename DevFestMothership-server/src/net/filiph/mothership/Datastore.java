@@ -185,7 +185,7 @@ public final class Datastore {
       entity = entities.get(0);
     }
     int size = entities.size();
-    if (size > 0) {
+    if (size > 1) {
       logger.severe(
           "Found " + size + " entities for regId " + regId + ": " + entities);
     }
