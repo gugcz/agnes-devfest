@@ -175,8 +175,9 @@ public final class Datastore {
   }
 
   private static Entity findDeviceByRegId(String regId) {
+	Query.Filter filter = new Query.FilterPredicate(DEVICE_REG_ID_PROPERTY, FilterOperator.EQUAL, regId);
     Query query = new Query(DEVICE_TYPE)
-        .addFilter(DEVICE_REG_ID_PROPERTY, FilterOperator.EQUAL, regId);
+        .setFilter(filter);
     PreparedQuery preparedQuery = datastore.prepare(query);
     List<Entity> entities = preparedQuery.asList(DEFAULT_FETCH_OPTIONS);
     Entity entity = null;
