@@ -268,6 +268,10 @@ public class MainActivity extends Activity {
 		int currentUid = getSharedPreferences(PREFS_NAME, 0).getInt("currentUid", 0);
 		Message currentMessage = Schedule.getCurrentMessage(currentUid);
 		
+		if (currentMessage == null) {
+			currentMessage = new Message(Schedule.date(2012, 10, 7, 16, 3), "...");
+		}
+		
 		// check if we ought to be showing a message sent via GCM
 		long lastGcmMessageTime = getSharedPreferences(PREFS_NAME, 0).getLong("gcmMessageTime", 0);
 		if (lastGcmMessageTime > currentMessage.time.getTime()) {
